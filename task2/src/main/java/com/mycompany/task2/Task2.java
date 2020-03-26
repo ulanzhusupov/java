@@ -23,23 +23,24 @@ import org.json.simple.parser.ParseException;
 public class Task2 {
 
     public static ArrayList getList(JSONObject triangle) {
-        ArrayList<Integer> list = new ArrayList();
+        ArrayList<JSONArray> list = new ArrayList();
         for (Iterator iterator = triangle.keySet().iterator(); iterator.hasNext();) {
-            String key = (String) iterator.next();
+            String key = (String) iterator.next(); //Точка
             
-            JSONArray coords = (JSONArray) triangle.get(key);
-            Iterator<Integer> points = coords.iterator();
+            JSONArray coords = (JSONArray) triangle.get(key); // Координаты точек
+            list.add(coords);
+//            Iterator<Integer> points = coords.iterator(); // итерация по точкам
             
-            while (points.hasNext()) {
-                list.add(((Number) points.next()).intValue());
-            }
+//            while (points.hasNext()) {
+//                list.add(((Number) points.next()).intValue());
+//            }
         }
         
         return list;
     }
 
     @SuppressWarnings("unchecked")
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         JSONParser jp = new JSONParser();
 
         try (FileReader reader = new FileReader("triangles.json")) {
@@ -53,14 +54,12 @@ public class Task2 {
 
             ArrayList<Long> t2 = getList(triangle2);
             
-            System.out.println(t1);
-            System.out.println(t2);
+//            long[] l = new long[]);
+            System.out.println();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
             e.printStackTrace();
         }
 
